@@ -10,7 +10,7 @@ npm install express-validator
 
 This will download the latest version of the [express-validator npm package](https://www.npmjs.com/package/express-validator).
 
-Once the command has done executing - if you were to to look inside the _"node modules"_ folder, you'd see that express-validator has a _transitive dependency_ on another module called [validator](https://github.com/chriso/validator.js):
+Once the command has done executing - if you were to to look inside the _"node modules"_ folder, you'd see that express-validator has a transitive dependency on another module called [validator](https://github.com/chriso/validator.js):
 
 ![](https://i.imgur.com/1tabli4.png)
 
@@ -18,7 +18,7 @@ You'll see why this is important later.
 
 ### Setup
 
-For the purposes of this tutorial, I'll assume you already have a script whose contents look something like this:
+For the purposes of this tutorial, I'll assume you have a script whose contents look something like this:
 
     // dependencies
     var express = require('express');
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 <strong>app.use(validator());</strong></code>
 </pre>
 
-There is only one thing you need to watch out for and that is, you must `use` express-validator *after* you `use` the [body parser middleware](https://github.com/expressjs/body-parser)*. If you do not, express-validator will not work. This is because without the body parser middleware, it would be impossible for express-validator to parse the values to validate!
+There is only one thing you need to watch out for and that is, you must `use` express-validator *after* you `use` the [body parser middleware](https://github.com/expressjs/body-parser). If you don't, express-validator will not work. This is because without the body parser middleware, it would not be possible to parse the values to validate.
 
 ### Validation
 
@@ -76,7 +76,7 @@ Here we want to validate that...
 
 <p style="font-size:15px">*Remember. Validation is not the same as verification. Validation merely confirms that the email is in the correct format. Verification confirms that that the user has access to the email. If you need to verify the email, consider sending a verification email.</p>
 
-Validating an email is a common requirement so we may as well start there.
+Validating an email is a common requirement so we might as well start there.
 
 Inside of the request handler, make a call to the `req.checkBody` function. Pass to this function the name of the input you want to validate (in this case, _"leader\_email"_) and the error message you want to return if the input is invalid:
 
@@ -131,7 +131,7 @@ req.checkBody(
 Hopefully by now the above listing is intuitive. If you are unsure about what any of the functions do, you can refer to their descriptions [here](https://github.com/chriso/validator.js#validators). Aside from that, there are just a couple of things to note about this code:
 
 - In a couple of places we _chain_ more than one validation function. This is possible thanks to [_fluent interfaces_](https://en.wikipedia.org/wiki/Fluent_interface).
-- We chain the `optional` function before chaining the `matches` function. The `optional` functions says _"this value is optional so do not attempt to validate it with `matches` **unless** the user actually entered something_". In other words, if the input is empty, `matches` won't be called.
+- For the _"team twitter"_ input we chain the `optional` function before chaining the `matches` function. The `optional` functions says: _"this value is optional so do not attempt to validate it with `matches` **unless** the user actually entered something_". In other words, if the _"team twitter"_ input is empty, `matches` won't be called and the input will be deemed valid.
 
 Remember. All we've done so far is define some rules. We are yet to enforce these rules. We'll do that now.
 
@@ -154,7 +154,8 @@ In order to determine whether the input is valid according to the rules, we call
 
 ![](https://i.imgur.com/tJO47Fj.png)
 
-(Note that I have removed most of the rules I wrote before for brevity)
+(As you may have noticed, I removed most validation rules from the request handler - this is solely for
+the sake of brevity.)
 
 Whilst emitting errors in JSON format might be appropriate for a web service, for most websites, this is not very nice. In such a case we can send `errors` back with a template:
 
@@ -196,7 +197,7 @@ This is an example using the [Jade template engine](https://github.com/jadejs/ja
 ### Extending express-validator
 Sometimes your validation rules will be too complex to convey using the built-in validation functions alone. Fortunately, express-validator allows you to define custom validation functions.
 
-To illustrate custom validation functions, imagine that the user is asked to enter exactly two, _unique_, comma-delimited values.
+To illustrate custom validation functions, imagine that the user is asked to enter exactly two, unique, comma-delimited values.
 
 Valid inputs would include:
 
@@ -219,8 +220,8 @@ With...
 
     app.use(validator({
       customValidators: {
-        containsTwoTags: function (value) {
-          var tags = value.split(',');
+        containsTwoTags: function (input) {
+          var tags = input.split(',');
           // Remove empty tags
           tags = tags
             .filter(function(tag) { return /\S/.test(tag) });
@@ -234,14 +235,15 @@ With...
       }
     })
 
-I shan't belabor the details of this custom function because those details are not likely to be of relevance to you. What you _do_ need to know is that the function returns `true` if the input is valid; otherwise, it returns `false`. When you input your own validation function, you'll need to ensure that it does the same.
+In the above listing we pass an [_object literal_](http://www.dyn-web.com/tutorials/object-literal/) with a `customValidators` property to the middleware. On this `customValidtors` property we define a function: `containsTwoTags`. I will not belabor the details of this function because they are too specific to this example. What I _will_ explain is that the function accepts a `input` argument and returns `true` if the input is valid; otherwise, it returns `false`. When you define your own validation function, you'll need to ensure that it does the same.
 
-You can use this custom validation function just like you would any other validation function, like this:
+Once you have defined your custom validator, you can chain it just like you would any other validation function:
 
     req.checkBody('tags', 'Enter exactly two distinct tags.').containsTwoTags();
 
+In this example I just defined a single validator - you could theoretically define as many as you want on the `customValidators` object, though.
 
 ### Conclusion
 This has been an introduction to input validation in Express with express-validator. Whilst I hope I have covered enough for you to hit the ground running in your application, if you encounter any problems, please consult the [documentation](httpss://github.com/ctavan/express-validator/blob/master/README.md) or [get in touch](https://twitter.com/bookercodes) and I'll be happy to help :).
 
-**P.S. If you read this far, you might want to follow me on [Twitter](https://twitter.com/bookercodes) and [GitHub](https://github.com/alexbooker), and subscribe to my [YouTube channel](https://www.youtube.com/channel/UCcQsDUZiK1GWDcP7BpVO_kw) and [blog](https://booker.codes/rss/).**
+**P.S. If you read this far, you might want to follow me on [Twitter](https://twitter.com/bookercodes) and [GitHub](https://github.com/alexbooker), or [subscribe](https://booker.codes/rss/) to my blog.**
