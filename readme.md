@@ -1,0 +1,3 @@
+Here is the thing: my [website](https://github.com/TryGhost/Ghost) is powered by [Ghost](https://github.com/TryGhost/Ghost). Ghost is :cool: but I need _somewhere_ to back up my articles...
+
+... because I write all my posts in markdown _anyway_ I thought I might as well back them up, right here, in this GitHub repo'.
