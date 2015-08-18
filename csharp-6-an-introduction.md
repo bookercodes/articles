@@ -90,7 +90,7 @@ The *runtime* manages the execution of bytecode. It recognizes a set of [IL inst
 
 The _framework libraries_ are essentially the libraries you reference from your projects to help you kick-start development:
 
-![](https://i.imgur.com/QmMDtNY.png)
+![](https://i.imgur.com/DBM3PS8.png)
 
 They encompass primitive types like `Int32` and `String` as well as complex types like `HttpClient` etc.
 
