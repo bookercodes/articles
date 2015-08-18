@@ -70,6 +70,8 @@ This "openness" is obviously _hugely_ beneficial for tool developers - tools lik
 
 The benefits of Roslyn are not limited to traditional tools like Visual Studio. [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more!
 
+(Something about Visual Studio diagnostics)
+
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
 I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
@@ -84,7 +86,7 @@ It is important to understand that the C# compiler, while part of the .NET Frame
 
 The *C# compiler* (as illustrated above in a diagram I pinched from Wikipedia) is a tool that translates C# code into bytecode known as [*MSIL*](https://en.wikipedia.org/wiki/MSIL).
 
-The *runtime* manages the execution of managed code. It recognizes a set of [IL instructions](https://en.wikipedia.org/wiki/List_of_CIL_instructions) and translates them into machine-specific assembly instructions on the fly.
+The *runtime* manages the execution of bytecode. It recognizes a set of [IL instructions](https://en.wikipedia.org/wiki/List_of_CIL_instructions) and translates them into machine-specific assembly instructions on the fly.
 
 The _framework libraries_ are essentially the libraries you reference from your projects to help you kick-start development:
 
@@ -95,7 +97,8 @@ They encompass primitive types like `Int32` and `String` as well as complex type
 **It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions nor is it dependent on new types in the framework libraries. (There is one exception to this for the _interpolated strings_ feature, but we'll cross that bridge when we come to it.)
 
 #### Visual Studio & The .NET Platform
-One more important thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free.
+One more important thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free. Good stuff.
+
 ### Conclusion
 
-In this article I set the tone for C# 6.0. Now that you have an idea about what to expect, let us start by examining the first new feature: [expression-bodied members]().
+In this article I set the tone for C# 6.0. Now that you have a sound idea about what to expect, let's start by examining the first new feature: [expression-bodied members]().
