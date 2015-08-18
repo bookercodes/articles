@@ -66,7 +66,7 @@ As you can see in the above illustration (which I pinched from the [Roslyn docum
 
 This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
 
-The benefits of Roslyn are not limited to traditional tools like Visual Studio. [scriptcs](http://scriptcs.net/) and [Omnisharp](http://www.omnisharp.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in ASP.NET vNext. Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis) and more!
+The benefits of Roslyn are not limited to traditional tools like Visual Studio. [scriptcs](http://scriptcs.net/) and [Omnisharp](http://www.omnisharp.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in ASP.NET vNext. Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more!
 
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
