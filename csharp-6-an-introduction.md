@@ -22,7 +22,7 @@
 
 Conventionally, each new version of C# has one super-feature, and a handful of miniature ones. For example, in the previous version of C#, C# 5.0, the super-feature was [asynchronous methods (`async`)](https://msdn.microsoft.com/en-us/library/hh156513.aspx) and the miniature features were [caller information attributes](https://msdn.microsoft.com/en-us/library/hh534540.aspx) and [improved "closures"](https://stackoverflow.com/questions/12112881/has-foreachs-use-of-variables-been-changed-in-c-sharp-5). C# 6.0 is a bit different, in that there is no super-feature, just a bunch of miniature ones.
 
-Almost all of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like major features (such as asynchronous methods) in earlier versions of the language did.
+Instead of introducing a new super-feature, C# 6.0 solves some small pain points in previous incarnations of the language. Almost all of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like major features (such as asynchronous methods) in earlier versions of the language did.
 
 As you'll see throughout this series, almost all of the new features are essentially [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) – in other words, most (but not all) of the features in C# 6.0 do not introduce new functionality, but instead enable you to do things you could already do in a more compact and readable manner.
 
@@ -43,7 +43,7 @@ There are 11 new features in total. Here's a quick rundown of the features (in t
 
 While these features are unlikely to revolutionize the way you write C#, they _will_ change the way you write code in specific scenarios, due to the fact that they are so much more efficient, you'll likely forget there was another way to code them.
 
-You might be wondering why there is no so-called super-feature this time around. Presumably, the reason is that the managed languages team were busy completing a project they first announced ~6 years ago - the [_.NET Compiler Platform_](), better known by it's code name, _Roslyn_.
+You might be wondering why there is no so-called super-feature this time around. Presumably, the reason is that the managed languages team were busy completing a project they first announced around 6 years ago - the [_.NET Compiler Platform_](), better known by it's code name, _Roslyn_.
 
 ### Roslyn
 
@@ -56,7 +56,9 @@ We could never have known *exactly* what the compiler was doing internally – i
 ![](https://github.com/dotnet/roslyn/wiki/images/compiler-pipeline.png)
 
 
-As the source code traversed this pipeline, the compiler would develop a wealth of knowledge about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity! The languages already wrote flawless code to achieve this functionality. Wouldn't it be nice if they shared the wealth? Well now it does, with Roslyn.
+As the source code traversed this pipeline, the compiler would develop a wealth of knowledge about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity!
+
+Like I said, the fact that the compiler was capable of developing a wealth of information about the source code but did not share the functionality or information was unfortunate. It would be _so_ much nicer if Microsoft shared the wealth. Well, now they do, via Roslyn.
 
 Roslyn is a reimagination of what a compiler should be. In a nutshell, it is a [open source](), ground-up rewrite of the Visual Basic and C# compilers in those languages themselves. In addition to providing a set of familiar compilers (csc.exe and vbc.exe), it provides a set of compiler APIs that expose rich information about the source code:
 
@@ -66,13 +68,13 @@ As you can see in the above illustration (which I pinched from the [Roslyn docum
 
 This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
 
-The benefits of Roslyn are not limited to traditional tools like Visual Studio. [scriptcs](http://scriptcs.net/) and [Omnisharp](http://www.omnisharp.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in ASP.NET vNext. Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more!
+The benefits of Roslyn are not limited to traditional tools like Visual Studio. Many [Omnisharp](http://www.omnisharp.net/) plugins and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in ASP.NET vNext. Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more!
 
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
 I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
 
-We're almost ready to dive in to C# 6.0 but before we do, I want to point out a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these things are old hat to you, I apologize. But these topics have been the cause of a lot of confusion in the past.
+We're almost ready to dive into C# 6.0 but before we do, I want to point out a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these things are old hat to you, I apologize, but these topics have been the cause of a lot of confusion in the past.
 
 ### Dissecting the .NET Framework
 
@@ -80,7 +82,7 @@ It is important to understand that the C# compiler, while part of the .NET Frame
 
 ![](https://upload.wikimedia.org/wikipedia/commons/a/af/Common_Language_Runtime_diagram.svg)
 
-The C# compiler (as illustrated above in a diagram I pinched from Wikipedia) is a tool that translates C# code into bytecode known as [*MSIL*](https://en.wikipedia.org/wiki/MSIL). This bytecode is then executed by the runtime and ultimately, translated into low-level assembly instructions.
+The *C# compiler* (as illustrated above in a diagram I pinched from Wikipedia) is a tool that translates C# code into bytecode known as [*MSIL*](https://en.wikipedia.org/wiki/MSIL). This bytecode is then executed by the runtime and ultimately, translated into low-level assembly instructions.
 
 The *runtime* manages the execution of managed code. It recognizes a set of [IL instructions](https://en.wikipedia.org/wiki/List_of_CIL_instructions) and translates them into machine-specific assembly instructions on the fly.
 
@@ -90,7 +92,7 @@ The _framework libraries_ are essentially the libraries you reference from your 
 
 They encompass primitive types like `Int32` and `String` as well as complex types like `HttpClient` etc.
 
-It is important to understand that **the changes in C# 6.0 stem from changes the compiler _only_**. You do *not* need to target the latest framework version to use C# 6.0. This is because C# 6.0 is not dependent on new IL instructions nor is it dependent on new types in the framework libraries. (There is one exception to this - interpolated strings require a type called `FormattableString` introduced in .NET 4.6 but we'll cross that bridge when we come to it.)
+It is important to note that **the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions nor is it dependent on new types in the framework libraries. (There is only one exception to this: _interpolated strings_ sometimes require the `FormattableString` type which was introduced in .NET 4.6 to support the feature. We'll cross that bridge when we come to it.)
 
 
 #### Visual Studio & The .NET Platform
