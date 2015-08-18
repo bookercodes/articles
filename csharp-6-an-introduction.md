@@ -22,9 +22,9 @@
 
 Conventionally, each new version of C# has one super-feature, and a handful of miniature ones. For example, in the previous version of C#, C# 5.0, the super-feature was [asynchronous methods (`async`)](https://msdn.microsoft.com/en-us/library/hh156513.aspx) and the miniature features were [caller information attributes](https://msdn.microsoft.com/en-us/library/hh534540.aspx) and [improved "closures"](https://stackoverflow.com/questions/12112881/has-foreachs-use-of-variables-been-changed-in-c-sharp-5). C# 6.0 is a bit different, in that there is no super-feature, just a bunch of miniature ones.
 
-Instead of introducing a new super-feature, C# 6.0 alleviates some of the small pain points from previous incarnations of the language. Almost all of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
+Instead of introducing a new super-feature, C# 6.0 alleviates some of the small pain points from previous versions of the language. Most of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
 
-As you'll see throughout this series, almost all of the new features are essentially [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) – in other words, most (but not all) of the features in C# 6.0 do not introduce new functionality, but instead enable you to do things you could already do in a more compact and readable manner.
+As you'll see throughout this series, most of the new features are essentially [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) – in other words, most (but not all) of the features in C# 6.0 do not introduce new functionality, but instead enable you to do things you could already do in a more compact and readable manner.
 
 There are 11 new features in total. Here's a quick rundown of the features (in the order we'll examine them), so you know what to expect:
 
