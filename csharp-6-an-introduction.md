@@ -22,7 +22,7 @@
 
 Conventionally, each new version of C# has one super-feature, and a handful of miniature ones. For example, in the previous version of C#, C# 5.0, the super-feature was [asynchronous methods (`async`)](https://msdn.microsoft.com/en-us/library/hh156513.aspx) and the miniature features were [caller information attributes](https://msdn.microsoft.com/en-us/library/hh534540.aspx) and [improved "closures"](https://stackoverflow.com/questions/12112881/has-foreachs-use-of-variables-been-changed-in-c-sharp-5). C# 6.0 is a bit different, in that there is no super-feature, just a bunch of miniature ones.
 
-Instead of introducing a new super-feature, C# 6.0 alleviates some of the small pain points from previous versions of the language. Most of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
+Instead of introducing a new super-feature, C# 6.0 alleviates some small pain points from previous versions of the language. Most of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
 
 As you'll see throughout this series, most of the new features are essentially [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) – in other words, most (but not all) of the features in C# 6.0 do not introduce new functionality, but instead enable you to do things you could already do in a more compact and readable manner.
 
@@ -68,15 +68,13 @@ As you can see in the above illustration (which I pinched from the [Roslyn docum
 
 This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
 
-The benefits of Roslyn are not limited to traditional tools like Visual Studio. [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more!
-
-(Something about Visual Studio diagnostics)
+The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to all kinds of advanced [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities.
 
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
 I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
 
-We're almost ready to dive into C# 6.0 but before we do, I want to point out a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these things are old hat to you, I apologize, but these topics have been the cause of a lot of confusion in the past.
+We're almost ready to dive into C# 6.0 but before we do, I want to point out a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these details are old-hat to you, I apologize. But these topics have been the cause of a lot of confusion in the past.
 
 ### Dissecting the .NET Framework
 
@@ -94,9 +92,8 @@ The _framework libraries_ are essentially the libraries you reference from your 
 
 They encompass primitive types like `Int32` and `String` as well as complex types like `HttpClient` etc.
 
-**It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions nor is it dependent on new types in the framework libraries. (There is one exception to this for the _interpolated strings_ feature, but we'll cross that bridge when we come to it.)
+**It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for the *interpolated strings*, but we'll cross that bridge when we come to it.).
 
-#### Visual Studio & The .NET Platform
 One more important thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free. Good stuff.
 
 ### Conclusion
