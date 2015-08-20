@@ -1,12 +1,14 @@
 # C# 6:0 An Introduction
 
-*Welcome to this series of articles in which we'll examine the details of the new features in C# 6.0. You are currently reading part 1 of 11:*
+*Welcome to this series of articles in which we'll examine the details of the new features in C# 6.0. You are reading part 1 of 11:*
+
 
 1. <em><strong>Introduction</strong></em>
-- <em><span title="Coming soon..." style="cursor:not-allowed;">Expression-bodied Members</span></em>
-- <em><span title="Coming soon..." style="cursor:not-allowed;">Getter-only Automatic Properties</span></em>
-- <em><span title="Coming soon..." style="cursor:not-allowed;">Null-conditional Operator</span></em>
-- <em><span title="Coming soon..." style="cursor:not-allowed;">nameof Operator</span></em>
+- <em><span title="Coming soon..." style="cursor:not-allowed;">Expression-Bodied Members</span></em>
+- <em><span title="Coming soon..." style="cursor:not-allowed;">Auto-Implemented Property Initializers</span></em>
+- <em><span title="Coming soon..." style="cursor:not-allowed;">Read-Only Auto-Implemented Properties</span></em>
+- <em><span title="Coming soon..." style="cursor:not-allowed;">Null-Conditional Operator</span></em>
+- <em><span title="Coming soon..." style="cursor:not-allowed;">NameOf Operator</span></em>
 - <em><span title="Coming soon..." style="cursor:not-allowed;">String Interpolation</span></em>
 - <em><span title="Coming soon..." style="cursor:not-allowed;">Await in Catch and Finally Blocks</span></em>
 - <em><span title="Coming soon..." style="cursor:not-allowed;">Exception Filters</span></em>
@@ -14,7 +16,7 @@
 - <em><span title="Coming soon..." style="cursor:not-allowed;">Extension Add in Collection Initializers</span></em>
 - <em><span title="Coming soon..." style="cursor:not-allowed;">Using Static Statement</span></em>
 
-*In addition to these articles, I am also producing a series of (free) screencasts about C# 6.0 on my YouTube channel, <a href="">CodeCast</a>. If you want to, you can check them out <a href="">here</a>.*
+*In addition to these articles, I am also producing a series of free screencasts about C# 6.0 on my YouTube channel, [CodeCast](https://www.youtube.com/channel/UCcQsDUZiK1GWDcP7BpVO_kw?sub_confirmation=1). If you want to, you can check them out [here](https://www.youtube.com/playlist?list=PL5ze0DjYv5DYK391_xP1Y8Oait1-_o5x9).*
 
 
 
@@ -22,23 +24,23 @@
 
 Conventionally, each new version of C# has one super-feature, and a handful of miniature ones. For example, in the previous version of C#, C# 5.0, the super-feature was [asynchronous methods (`async`)](https://msdn.microsoft.com/en-us/library/hh156513.aspx) and the miniature features were [caller information attributes](https://msdn.microsoft.com/en-us/library/hh534540.aspx) and [improved "closures"](https://stackoverflow.com/questions/12112881/has-foreachs-use-of-variables-been-changed-in-c-sharp-5). C# 6.0 is a bit different, in that there is no super-feature, just a bunch of miniature ones.
 
-Instead of introducing a new super-feature, C# 6.0 alleviates some small pain points from previous versions of the language. Most of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
+Instead of introducing a new super-feature, C# 6.0 introduces a bunch of small features that alleviate small pain points from previous versions of the language. Most of the new features in C# 6.0 will make your code simpler, leaner, more readable, and more pleasant to write, but they are unlikely to revolutionize the way you write C# like super-features (such as asynchronous methods) in earlier versions of the language have.
 
 As you'll see throughout this series, most of the new features are essentially [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) – in other words, most (but not all) of the features in C# 6.0 do not introduce new functionality, but instead enable you to do things you could already do in a more compact and readable manner.
 
 There are 11 new features in total. Here's a quick rundown of the features (in the order we'll examine them), so you know what to expect:
 
-- **Expression-bodied members -** An ability to associate a single expression with a member (much like a lambda expression, but for members).
-- **Auto-implemented property initializers –** It is now possible to initialize auto-properties with a default value, inline, much like a field initializer does for fields.
-- **Read-only auto-implemented properties -** You can now omit the getter from an auto-property, which makes it read-only.
-- **Null-conditional Operator –** _Much_ more compact and readable syntax for deep null checking.
-- **nameOf operator –** A feature that allows you to refer to an identifier (such as a variable name) in a refactor-proof way.
-- **String Interpolation -** Native support for string interpolation. Sort of like `string.Format` but more expressive, readable, and stable.
-- **Await in catch & finally blocks –** Using `await` in a catch or finally block _used_ to result in an error, that has been fixed.
-- **Exception filters -** An ability  to conditionally enter exception handlers.
-- **Index initializers –** Sort-of like collection initializers, but they use indexers instead of an `Add` method.
-- **Extension Add in Collection Initializers –** Small feature. The compiler now detects extension methods called `Add` instead of just members on the type.
-- **Using static statement –** Last, but certainly not least, the using static statement allows you to remove the need to fully qualify a method.
+- **Expression-bodied members -** Allow you to associate a single expression with a member instead of a block (much like a lambda expression, but for members).
+- **Auto-implemented property initializers –** Allow you to initialize automatic properties with a default value, inline, much like a field initializer.
+- **Read-only auto-implemented properties -** Allow you to omit the `get`ter from an automatic, which makes it read-only.
+- **Null-conditional Operator –** A _much_ more compact syntax for deep null checks.
+- **nameOf operator –** Allow you to refer to an identifier (such as an argument name) in a resilient way.
+- **String Interpolation -** Language support for [composite formatting](https://msdn.microsoft.com/en-us/library/txafckwd.aspx).
+- **Await in catch & finally blocks –** It is now possible to use `await` in catch and finally blocks.
+- **Exception filters -** Allow you to conditionally enter exception handlers.
+- **Index initializers –** Allow you to elegantly add elements to an indexed collection via an index.
+- **Extension Add in Collection Initializers –** Allow you to add elements to a collection based on an extension method called `Add` (previously, the `Add` method _had_ to be part of the collection type.)
+- **Using static statement –** Removes the need to fully qualify a method.
 
 
 While these features are unlikely to revolutionize the way you write C#, they _will_ change the way you write code in specific scenarios, due to the fact that they are so much more efficient, you'll likely forget there was another way to code them.
@@ -58,7 +60,7 @@ We could never have known *exactly* what the compiler was doing internally – i
 
 As the source code traversed this pipeline, the compiler would develop a wealth of knowledge about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity!
 
-It would have been *so* much nicer if the compiler was open source and exposed a set of compiler APIs. As you may have guessed, now it does both, through Roslyn.
+It would have been *so* much nicer if the compiler was 1/ open source and 2/ exposed a set of compiler APIs. As you may have guessed, now it does both, through Roslyn.
 
 Roslyn is a reimagination of what a compiler should be. In a nutshell, it is a [open source](), ground-up rewrite of the Visual Basic and C# compilers in those languages themselves. In addition to providing a set of familiar compilers (csc.exe and vbc.exe), it provides a set of compiler APIs that expose rich information about the source code:
 
@@ -68,13 +70,13 @@ As you can see in the above illustration (which I pinched from the [Roslyn docum
 
 This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
 
-The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to a whole new world of [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities and I for one, am very excited about what the future has in store.
+The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn. So is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to a whole new world of [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities.
 
-As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
+As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. *Presumably*, it is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
 I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
 
-We're almost ready to dive into C# 6.0 but before we do, I want to point out a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these details are old-hat to you, I apologize. But these topics have been the cause of a lot of confusion in the past.
+We're nearly ready to dive into C# 6.0, but before we do, I want to explain a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these details are familiar to you, I apologize. But these topics have been the cause of a lot of confusion in the past.
 
 ### Dissecting the .NET Framework
 
@@ -92,12 +94,12 @@ The _framework libraries_ are essentially the libraries you reference from your 
 
 They encompass primitive types like `Int32` and `String` as well as complex types like `HttpClient` etc.
 
-Sometimes there is an overlap between the language, runtime, and framework features. For instance, the C# language requires a type called `System.IDisposable`, which contains a method called `Dispose`. These are required in order to define the using statement. Because most of the features in C# 6.0 are syntactic sugar (which is essentially the compiler being willing to do some heavy lifting for you), there is almost no overlap.
+Understand that the new features in C# 6.0 stem from changes the compiler *only*. **You do *not* need to target the latest framework version to use C# 6.0 features.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for *interpolated strings*, but we'll cross that bridge when we come to it.).
 
- **It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for the *interpolated strings*, but we'll cross that bridge when we come to it.).
-
-One more important thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free. Good stuff.
+One more thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free.
 
 ### Conclusion
 
 In this article I set the tone for C# 6.0. Now that you have a sound idea about what to expect, let's start by examining the first new feature: [expression-bodied members]().
+
+**P.S. If you read this far, you might want to follow me on [Twitter](https://twitter.com/bookercodes) and [GitHub](https://github.com/alexbooker), or [subscribe](https://booker.codes/rss/) to my blog.**
