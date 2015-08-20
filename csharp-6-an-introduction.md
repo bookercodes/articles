@@ -1,5 +1,3 @@
-# C# 6:0 An Introduction
-
 *Welcome to this series of articles in which we'll examine the details of the new features in C# 6.0. You are reading part 1 of 11:*
 
 
@@ -73,6 +71,9 @@ This "openness" is obviously _hugely_ beneficial for tool developers - tools lik
 The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn. So is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to a whole new world of [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities.
 
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. *Presumably*, it is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
+
+> #### Why the name Roslyn?
+> A small piece of trivia is that the code name Roslyn was inspired by the name of a small town in Washington called [Roslyn](https://en.wikipedia.org/wiki/Roslyn,_Washington), which is about an hours drive from the Microsoft campus in Seattle.
 
 I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
 
