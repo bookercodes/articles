@@ -58,7 +58,7 @@ We could never have known *exactly* what the compiler was doing internally – i
 
 As the source code traversed this pipeline, the compiler would develop a wealth of knowledge about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity!
 
-It would have been *so* much nicer if the compiler was open source and exposed a set of compiler APIs. As you may have guessed, now it does both through Roslyn.
+It would have been *so* much nicer if the compiler was open source and exposed a set of compiler APIs. As you may have guessed, now it does both, through Roslyn.
 
 Roslyn is a reimagination of what a compiler should be. In a nutshell, it is a [open source](), ground-up rewrite of the Visual Basic and C# compilers in those languages themselves. In addition to providing a set of familiar compilers (csc.exe and vbc.exe), it provides a set of compiler APIs that expose rich information about the source code:
 
@@ -68,7 +68,7 @@ As you can see in the above illustration (which I pinched from the [Roslyn docum
 
 This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
 
-The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to all kinds of advanced [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities.
+The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn, so is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to a whole new world of [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities and I for one, am very excited about what the future has in store.
 
 As you can probably appreciate, porting the current compilers' code to managed code was no small undertaking. It is because the managed languages team was focused on completing Roslyn that there wasn't much time for language feature innovation this time around. That being said, Roslyn will make it easier to prototype and implement new features, so we'll likely see a quicker turn-around for language innovation going forward.
 
@@ -92,7 +92,9 @@ The _framework libraries_ are essentially the libraries you reference from your 
 
 They encompass primitive types like `Int32` and `String` as well as complex types like `HttpClient` etc.
 
-**It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for the *interpolated strings*, but we'll cross that bridge when we come to it.).
+Sometimes there is an overlap between the language, runtime, and framework features. For instance, the C# language requires a type called `System.IDisposable`, which contains a method called `Dispose`. These are required in order to define the using statement. Because most of the features in C# 6.0 are syntactic sugar (which is essentially the compiler being willing to do some heavy lifting for you), there is almost no overlap.
+
+ **It is important to note that the changes in C# 6.0 stem from changes the compiler _only_. You do _not_ need to target the latest framework version to use C# 6.0.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for the *interpolated strings*, but we'll cross that bridge when we come to it.).
 
 One more important thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free. Good stuff.
 
