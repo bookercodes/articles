@@ -1,4 +1,4 @@
-*Welcome to this series of articles in which we'll examine the details of the new features in C# 6.0. You are reading part 1 of 11:*
+*Welcome to this series of articles in which we'll examine the details of the new features in C# 6.0. You are currently reading part 1 of 11:*
 
 
 1. <em><strong>Introduction</strong></em>
