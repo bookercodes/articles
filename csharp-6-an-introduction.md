@@ -28,17 +28,17 @@ As you'll see throughout this series, most of the new features are essentially [
 
 There are 11 new features in total. Here's a quick rundown of the features (in the order we'll examine them), so you know what to expect:
 
-- **Expression-bodied members -** Allow you to associate a single expression with a member instead of a block (much like a lambda expression, but for members).
-- **Auto-implemented property initializers –** Allow you to initialize automatic properties with a default value, inline, much like a field initializer.
-- **Read-only auto-implemented properties -** Allow you to omit the `get`ter from an automatic, which makes it read-only.
-- **Null-conditional Operator –** A _much_ more compact syntax for deep null checks.
-- **nameOf operator –** Allow you to refer to an identifier (such as an argument name) in a resilient way.
-- **String Interpolation -** Language support for [composite formatting](https://msdn.microsoft.com/en-us/library/txafckwd.aspx).
-- **Await in catch & finally blocks –** It is now possible to use `await` in catch and finally blocks.
-- **Exception filters -** Allow you to conditionally enter exception handlers.
-- **Index initializers –** Allow you to elegantly add elements to an indexed collection via an index.
-- **Extension Add in Collection Initializers –** Allow you to add elements to a collection based on an extension method called `Add` (previously, the `Add` method _had_ to be part of the collection type.)
-- **Using static statement –** Removes the need to fully qualify a method.
+- **Expression-Bodied Members -** Allow you to associate a single expression with a member instead of a block (much like a lambda expression, but for members).
+- **Auto-Implemented Property Initializers –** Allow you to initialize automatic properties with a default value, inline, much like a field initializer.
+- **Read-Only Auto-Implemented Properties -** Allow you to omit the `get`ter from an automatic property, which makes it read-only.
+- **Null-Conditional Operator –** A much more compact syntax for deep null checks.
+- **NameOf Operator –** Allows you to refer to an identifier (such as an argument name) in a resilient way.
+- **String Interpolation -** Language support for [*composite formatting*](https://msdn.microsoft.com/en-us/library/txafckwd.aspx).
+- **Await in Catch and Finally Blocks –** It is now possible to use `await` in catch and finally blocks.
+- **Exception Filters -** Allow you to conditionally enter exception handlers.
+- **Index Initializers –** Allow you to elegantly add elements to an indexed collection via an index.
+- **Extension Add in Collection Initializers –** Allow you to add elements to a collection based on an extension method called `Add` (previously, the `Add` method had to be part of the collection type.)
+- **Using Static Statement –** Removes the need to fully qualify public static members.
 
 
 While these features are unlikely to revolutionize the way you write C#, they _will_ change the way you write code in specific scenarios, due to the fact that they are so much more efficient, you'll likely forget there was another way to code them.
@@ -56,9 +56,9 @@ We could never have known *exactly* what the compiler was doing internally – i
 ![](https://github.com/dotnet/roslyn/wiki/images/compiler-pipeline.png)
 
 
-As the source code traversed this pipeline, the compiler would develop a wealth of knowledge about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity!
+As the source code traversed this pipeline, the compiler would develop a wealth of information about it - information about what elements are present in the code, how they relate to each other, etc. - this information, however, was private. This was unfortunate because, that information could have been of *tremendous* value to developers outside of the managed languages team. Think about tools like [SharpDevelop](), who require a deep understanding of source code - they had to rely on their own implementations to parse and analyse source code to power their features (such as syntax colorization and completion lists).  Even Visual Studio had three separate makeshift language services that lacked feature parity!
 
-It would have been *so* much nicer if the compiler was 1/ open source and 2/ exposed a set of compiler APIs. As you may have guessed, now it does both, through Roslyn.
+It would have been *so* much nicer if the compiler was 1/ open source and 2/ exposed a set of compiler APIs. As you may have guessed, now the compiler does both, through Roslyn.
 
 Roslyn is a reimagination of what a compiler should be. In a nutshell, it is a [open source](), ground-up rewrite of the Visual Basic and C# compilers in those languages themselves. In addition to providing a set of familiar compilers (csc.exe and vbc.exe), it provides a set of compiler APIs that expose rich information about the source code:
 
@@ -66,7 +66,7 @@ Roslyn is a reimagination of what a compiler should be. In a nutshell, it is a [
 
 As you can see in the above illustration (which I pinched from the [Roslyn documentation](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview)), each phase in the compiler pipeline has a corresponding compiler API.
 
-This "openness" is obviously _hugely_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which'll make them more powerful.
+This "openness" is obviously _very_ beneficial for tool developers - tools like SharpDevelop and Visual Studio can now use Roslyn to power their features instead of relying on their own makeshift implementations, which will make them more powerful.
 
 The benefits of Roslyn are not limited to traditional tools like Visual Studio. Hot open-source tools like [Omnisharp](http://www.omnisharp.net/) and  [scriptcs](http://scriptcs.net/) are now powered by Roslyn. So is [dynamic development](http://weblogs.asp.net/scottgu/introducing-asp-net-5) in [ASP.NET 5](http://www.asp.net/vnext). Roslyn will also make it easier to embed C# in [domain-specific languages](), build [static analyzers](https://en.wikipedia.org/wiki/Static_program_analysis), and more! It really opens the door to a whole new world of [meta-programming](https://en.wikipedia.org/wiki/Metaprogramming) possibilities.
 
@@ -75,9 +75,9 @@ As you can probably appreciate, porting the current compilers' code to managed c
 > #### Why the name Roslyn?
 > A small piece of trivia is that the code name Roslyn was inspired by the name of a small town in Washington called [Roslyn](https://en.wikipedia.org/wiki/Roslyn,_Washington), which is about an hours drive from the Microsoft campus in Seattle.
 
-I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0 which is the focus of these articles.
+I shan't belabour Roslyn in this article because, while Roslyn is a very interesting topic, understanding it will not particularly help your understanding of C# 6.0, which is the focus of these articles.
 
-We're nearly ready to dive into C# 6.0, but before we do, I want to explain a couple of technical details relating to the differences between the compiler, runtime and framework libraries. If these details are familiar to you, I apologize. But these topics have been the cause of a lot of confusion in the past.
+We're nearly ready to dive into C# 6.0, but before we do, I want to briefly explain a couple of technical details relating to the differences between the compiler, the runtime, and the framework libraries. If these details are familiar to you, I apologize - you should feel free to skip to the conclusion - but these topics have been the cause of a lot of confusion in the past.
 
 ### Dissecting the .NET Framework
 
@@ -97,7 +97,7 @@ They encompass primitive types like `Int32` and `String` as well as complex type
 
 Understand that the new features in C# 6.0 stem from changes the compiler *only*. **You do *not* need to target the latest framework version to use C# 6.0 features.** This is because C# 6.0 is not dependent on new IL instructions, nor is it dependent on new types in the framework libraries (with one exception for *interpolated strings*, but we'll cross that bridge when we come to it.).
 
-One more thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download Visual Studio 2015 Community Edition for free.
+One more thing to note before we dive in is that, if you want to use C# 6.0 (and of course, you do), you’ll need to be using Visual Studio 2015. If you are yet to install Visual Studio 2015, you can head over to the [Visual Studio website](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx), and download the community edition for free.
 
 ### Conclusion
 
