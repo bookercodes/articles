@@ -30,7 +30,7 @@ There are 11 new features in total. Here's a quick rundown of the features (in t
 
 - **Expression-Bodied Members -** Allow you to associate a single expression with a member instead of a block (much like a lambda expression, but for members).
 - **Auto-Implemented Property Initializers –** Allow you to initialize automatic properties with a default value, inline, much like a field initializer.
-- **Read-Only Auto-Implemented Properties -** Allow you to omit the `get`ter from an automatic property, which makes it read-only.
+- **Read-Only Auto-Implemented Properties -** Allow you to omit the `set`ter from an automatic property, which makes it read-only.
 - **Null-Conditional Operator –** A much more compact syntax for deep null checks.
 - **NameOf Operator –** Allows you to refer to an identifier (such as an argument name) in a resilient way.
 - **String Interpolation -** Language support for [*composite formatting*](https://msdn.microsoft.com/en-us/library/txafckwd.aspx).
