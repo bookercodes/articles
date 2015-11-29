@@ -27,9 +27,9 @@ describe("isPrime()", function() {
 
 What do you think about these tests? Do you think that they're adequate?
 
-I don't. think these tests are very good at all. Here's why:
+I don't think these tests are very good at all. Here's why:
 
-At the moment, all these tests prove is that the function returns `true` if the input is `2`, or `false` if if the input is `4`. 
+At the moment, all these tests prove is that the function returns `true` if the input is `2`, or `false` if the input is `4`. 
 
 The `isPrime` function's implementation could be as erroneous as: 
 
@@ -43,7 +43,7 @@ export default function isPrime(num) {
 }
 ```
 
-And the tests would still pass.
+and the tests would still pass.
 
 Clearly our test coverage is inadequate - we'll need to add more tests if we are ever going to trust our test suite to catch [regressions](https://en.wikipedia.org/wiki/Software_regression).  
 
@@ -76,7 +76,7 @@ describe("isPrime", function() {
 });
 ```
 
-Whilst this approach provides much better code coverage of functionality, it also incurs a high cost to test maintainability, due to the repetitious nature of the tests. Repetitious tests are untenable because any changes made to one of the tests must be propagated to all of the similar tests. In other words, this approach violates the  [DRY principle](), which is no good.
+Whilst this approach provides much better code coverage of functionality, it also incurs a high cost to test maintainability, due to the repetitious nature of the tests. Repetitious tests are untenable because any changes made to one of the tests must be propagated to all of the similar tests. In other words, this approach violates the [DRY principle](), which isn't good.
 
 This is a common problem, for which a solution already exists. Enter the *data-driven test pattern*.
 
@@ -110,9 +110,9 @@ As I am sure you'll all agree, a quality test should make it immediately clear w
 
 ## A Better Data-Driven Test
 
-In order to improve the test output, we can leverage our assertion libraries to  report a custom assertion failure message.
+In order to improve the test output, we can leverage our assertion libraries to report a custom assertion failure message.
 
-Here I am using [Chai's BDD DSL](http://chaijs.com/api/bdd/), but any assertion library worth it's salt enables custom assertion failure messages:
+Here I am using [Chai's BDD DSL](http://chaijs.com/api/bdd/), but any assertion library worth its salt enables custom assertion failure messages:
 
 ```javascript
 var primeNumbers = [2, 3, 5, 53, 443, 977];
@@ -130,12 +130,11 @@ Now, when one or more tests fail, we get a useful error message:
 
 ![](https://i.imgur.com/JkuHnr9.png)
 
-This is a solid implementation that I use for the majoroty of my data-driven tests. There is, however, one more slight variation of this implementation that I would like to share with you in this article. 
+This is a solid implementation that I use for the majority of my data-driven tests. There is, however, one more slight variation of this implementation that I would like to share with you in this article. 
 
 ## Custom Test Names
 
 One limitation of the aforementioned implementation is that the test names are all the same and therefore, very general. 
-
 
 You could, if you wanted to, associate descriptions with each of your tests, like so:
 
