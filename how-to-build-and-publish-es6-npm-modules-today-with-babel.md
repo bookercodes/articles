@@ -151,6 +151,6 @@ As you can see, there's no trace of the `source` folder; there's only the `distr
 
 In this article you learned how to utilize the syntactic niceties afforded by ES6 whilst still maintaining support for platforms that don't yet support it. You also learned about some potential pitfalls along the way, like how you should probably use `module.exports` instead of an ES6 export statement.
 
-_Special thanks to: [Maarten Van Giel](https://twitter.com/maartenvangiel), [Romaine Rose-Cameron](https://twitter.com/R0ma1ne), [partycoder](https://www.livecoding.tv/partycoder/), and [kevin-DL](https://github.com/kevin-DL)._
+_Special thanks to: [Stephen Moon](https://twitter.com/s_moon_uk), [Maarten Van Giel](https://twitter.com/maartenvangiel), [Romaine Rose-Cameron](https://twitter.com/R0ma1ne), [partycoder](https://www.livecoding.tv/partycoder/), and [kevin-DL](https://github.com/kevin-DL)._
 
 **P.S. If you read this far, you might want to follow me on [Twitter](https://twitter.com/bookercodes) and [GitHub](https://github.com/alexbooker), or [subscribe](https://booker.codes/rss/) to my blog.**
